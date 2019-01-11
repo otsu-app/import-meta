@@ -1,0 +1,83 @@
+{
+  "name": "import-meta",
+  "version": "1.0.0",
+  "description": "Tiny utility for relative paths in node ES6",
+  "homepage": "https://github.com/otsu-app/import-meta",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=11.x"
+  },
+  "keywords": [
+    "import",
+    "meta",
+    "path",
+    "relative",
+    "es6"
+  ],
+  "xo": {
+    "space": true,
+    "parser": "babel-eslint",
+    "rules": {
+      "semi": 0,
+      "key-spacing": 0,
+      "no-else-return": 0,
+      "quotes": 0,
+      "padded-blocks": 0,
+      "default-case": 0,
+      "indent": 0,
+      "capitalized-comments": 0,
+      "spaced-comment": 0,
+      "space-unary-ops": 0,
+      "no-extra-semi": 1,
+      "arrow-parens": 0,
+      "space-before-function-paren": 0,
+      "import/no-extraneous-dependencies": 0,
+      "import/no-unresolved": 0,
+      "unicorn/catch-error-name": 0,
+      "guard-for-in": 0,
+      "no-warning-comments": 0
+    }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-syntax-import-meta"
+    ]
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ],
+    "babel": {
+      "extensions": [
+        "mjs",
+        "js"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/register": "^7.0.0",
+    "ava": "^1.0.1",
+    "babel-eslint": "^10.0.1",
+    "esm": "^3.0.84",
+    "nyc": "^13.1.0",
+    "xo": "^0.23.0"
+  },
+  "scripts": {
+    "prebuild": "yarn lint",
+    "build": "babel src --out-dir lib",
+    "postbuild": "cp src/index.js lib/index.mjs",
+    "lint": "xo src test/spec --no-color",
+    "pretest": "yarn build",
+    "test": "ava ${SPEC:-test/spec} --no-color",
+    "cover": "nyc --reporter=lcov npm test"
+  }
+}
